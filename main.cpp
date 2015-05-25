@@ -8,6 +8,26 @@
 using namespace std;
 using namespace boost::filesystem;
 
+ std::string test;
+ 
+namespace sha1
+{
+	void calc(const void* src, const int bytelength, unsigned char* hash);
+	void toHexString(const unsigned char* hash, char* hexstring);
+
+}
+
+string hash_sha1(const char * hash_str, int length) {
+	unsigned char * hash = new unsigned char[length];
+	char * hexstring = new char[41]; // 
+	sha1::calc(hash_str, length, hash);
+	sha1::toHexString(hash, hexstring);
+
+	return hexstring;
+	delete[] hash;
+	delete[] hexstring;
+}
+
 unsigned long int adler(const string & str)
 {
 	unsigned int s1 = 1;
